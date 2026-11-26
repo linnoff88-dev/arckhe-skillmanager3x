@@ -1,7 +1,7 @@
 ---
 name: session-handoff
 description: >-
-  Use when the user wants to end a session and hand off context to a future agent. Triggers include "session handoff", "handoff", "wrap up", "wrap up session", "vou dar /clear", "encerrar sessão",
+  Use when the user wants to end a session and hand off context to a future agent. Triggers include "session handoff", "handoff", "wrap up", "wrap up session", "vou dar /clear", "encerrar sessêo",
   "passar para outro agente", "resumo final antes de limpar", "summarize before clear". Produces a structured, sanitized handoff in chat and, when the project root has handoffs/, AGENTS.md or
   CLAUDE.md (creating handoffs/history/ if missing), saves it with scripts/handoff-grava.py as a never-overwritten snapshot handoffs/history/<UTC-stamp>-<assunto>.md, keeps handoffs/latest.md as an
   index of open work by subject (plus a pointer to the newest) and commits only those files (no push), so a fresh agent in any runtime can continue without losing continuity.
@@ -15,17 +15,17 @@ It is a **context-handoff artifact**, not a status report. The audience is a fut
 
 ## When to invoke
 
-User says: "session handoff", "handoff", "wrap up", "wrap up session", "vou dar /clear", "encerrar sessão", "passar para outro agente", "resumo final antes de limpar", "summarize before clear".
+User says: "session handoff", "handoff", "wrap up", "wrap up session", "vou dar /clear", "encerrar sessêo", "passar para outro agente", "resumo final antes de limpar", "summarize before clear".
 
 **`/clear` intent:**
 - Clear ("vou dar /clear", "vou limpar agora") with active work → run the handoff directly.
 - Vague ("talvez eu limpe") → ask once: "rodar handoff antes?"
 
-**Copy of the stalled session (hook-longrun 1.5.1+: the request starts with "A sessão ficou parada"):** you are a copy (`--fork-session`) opened only to write the handoff. Write it with `handoff-grava.py`, reply "Handoff atualizado: <arquivo>" and stop: do not continue any task, do not edit other files, do not push.
+**Copy of the stalled session (hook-longrun 1.5.1+: the request starts with "A sessêo ficou parada"):** you are a copy (`--fork-session`) opened only to write the handoff. Write it with `handoff-grava.py`, reply "Handoff atualizado: <arquivo>" and stop: do not continue any task, do not edit other files, do not push.
 
 **Requested by the hook (context band, compaction or continuous handoff) in the middle of a task:** this is not the end of the session. Write it, notify in one line and **continue the task the user asked for** to the end, in the same response. Do not stop midway, do not ask whether to continue and do not ask for `/clear`; suggest a new session only when the task is finished.
 
-Do not invoke for "organiza/otimiza a sessão" (that is `session-statusline`) nor for "analise a memória" / "CLAUDE.md" (that is `memory-audit`).
+Do not invoke for "organiza/otimiza a sessêo" (that is `session-statusline`) nor for "analise a memória" / "CLAUDE.md" (that is `memory-audit`).
 
 ## How to produce the summary
 

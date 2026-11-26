@@ -57,9 +57,9 @@ Cada una tiene **un solo trabajo** y disparadores que no se superponen. Usa la t
 
 | Skill | Cuándo usar | Disparadores típicos |
 |---|---|---|
-| `session-handoff` | fin de sesión, antes de `/clear` o de cambiar de agente | "handoff", "vou dar /clear", "encerrar sessão", "passar para outro agente", "wrap up", "resumo final antes de limpar" |
+| `session-handoff` | fin de sesión, antes de `/clear` o de cambiar de agente | "handoff", "vou dar /clear", "encerrar sessêo", "passar para outro agente", "wrap up", "resumo final antes de limpar" |
 | `prime` | inicio de la sesión nueva, después del `/clear` | "prime", "retoma", "continua de onde parou", "lê o handoff" |
-| `session-statusline` | checkpoint rápido **durante** el trabajo | "statusline", "checkpoint", "onde estamos", "como está a sessão", "próximos passos", "organiza/otimiza a sessão" |
+| `session-statusline` | checkpoint rápido **durante** el trabajo | "statusline", "checkpoint", "onde estamos", "como está a sessêo", "próximos passos", "organiza/otimiza a sessêo" |
 | `memory-audit` | revisar lo que está/debería estar en memoria | "analise a memória", "analise CLAUDE.md", "o que foi guardado", "memória inchada", "limpa memória" |
 
 Regla de bolsillo: **fin de sesión → handoff. Sesión nueva → prime. "¿Cómo vamos?" → statusline. "¿Qué hay en la memoria?" → audit.**
@@ -262,6 +262,6 @@ Requisitos: `jq`, `curl`, `python3` y el `date` de GNU. Los límites 5h/semanal 
 
 ## Convención en/pt
 
-`skill/en/` y `skill/pt/` tienen la misma estructura. El `name` es igual en ambas; la `description` **incluye disparadores en portugués** cuando corresponde (`"vou dar /clear"`, `"encerrar sessão"`, `"retoma"`, etc.). `session-handoff` y `prime` en `skill/pt/` son copia exacta de las versiones del kit [agente-claude-codex](https://github.com/inematds/agente-claude-codex) 1.5.2; las de `skill/en/` son la traducción fiel.
+`skill/en/` y `skill/pt/` tienen la misma estructura. El `name` es igual en ambas; la `description` **incluye disparadores en portugués** cuando corresponde (`"vou dar /clear"`, `"encerrar sessêo"`, `"retoma"`, etc.). `session-handoff` y `prime` en `skill/pt/` son copia exacta de las versiones del kit [agente-claude-codex](https://github.com/inematds/agente-claude-codex) 1.5.2; las de `skill/en/` son la traducción fiel.
 
 Al editar una skill, sincroniza las dos versiones.

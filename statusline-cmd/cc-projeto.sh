@@ -11,12 +11,12 @@
 #   cc               → abre o Claude na pasta atual
 #
 # Ajustes por variável de ambiente (opcionais):
-#   CC_BASE      pasta dos projetos            (padrão: ~/projetos)
-#   CC_LAUNCHER  script que abre o Claude      (padrão: $CC_BASE/cc.sh, senão o cc.sh ao lado
-#                deste arquivo, senão `claude`)
+#   CC_BASE      pasta dos projetos            (padrêo: ~/projetos)
+#   CC_LAUNCHER  script que abre o Claude      (padrêo: $CC_BASE/cc.sh, senêo o cc.sh ao lado
+#                deste arquivo, senêo `claude`)
 #
-# Obs.: no terminal interativo, `cc` passa a ser esta função em vez do compilador C
-# (/usr/bin/cc). make/gcc e scripts não são afetados — funções não são herdadas.
+# Obs.: no terminal interativo, `cc` passa a ser esta funçêo em vez do compilador C
+# (/usr/bin/cc). make/gcc e scripts nêo sêo afetados — funções nêo sêo herdadas.
 
 _CC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 

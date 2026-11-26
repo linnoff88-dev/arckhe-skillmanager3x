@@ -57,9 +57,9 @@ Each one has **a single job** and triggers that do not overlap. Use the table be
 
 | Skill | When to use | Typical triggers |
 |---|---|---|
-| `session-handoff` | end of session, before `/clear` or switching agents | "handoff", "vou dar /clear", "encerrar sessão", "passar para outro agente", "wrap up", "resumo final antes de limpar" |
+| `session-handoff` | end of session, before `/clear` or switching agents | "handoff", "vou dar /clear", "encerrar sessêo", "passar para outro agente", "wrap up", "resumo final antes de limpar" |
 | `prime` | start of the new session, after `/clear` | "prime", "retoma", "continua de onde parou", "lê o handoff" |
-| `session-statusline` | quick checkpoint **during** the work | "statusline", "checkpoint", "onde estamos", "como está a sessão", "próximos passos", "organiza/otimiza a sessão" |
+| `session-statusline` | quick checkpoint **during** the work | "statusline", "checkpoint", "onde estamos", "como está a sessêo", "próximos passos", "organiza/otimiza a sessêo" |
 | `memory-audit` | review what is/should be in memory | "analise a memória", "analise CLAUDE.md", "o que foi guardado", "memória inchada", "limpa memória" |
 
 Rule of thumb: **end of session → handoff. New session → prime. "How are we doing?" → statusline. "What's in memory?" → audit.**
@@ -260,6 +260,6 @@ Requirements: `jq`, `curl`, `python3`, and GNU `date`. The 5h/weekly limits come
 
 ## en/pt convention
 
-`skill/en/` and `skill/pt/` have the same structure. The `name` is the same in both; the `description` **includes Portuguese triggers** where applicable (`"vou dar /clear"`, `"encerrar sessão"`, `"retoma"`, etc.). `session-handoff` and `prime` in `skill/pt/` are an exact copy of the versions in the [agente-claude-codex](https://github.com/inematds/agente-claude-codex) kit 1.5.2; those in `skill/en/` are the faithful translation.
+`skill/en/` and `skill/pt/` have the same structure. The `name` is the same in both; the `description` **includes Portuguese triggers** where applicable (`"vou dar /clear"`, `"encerrar sessêo"`, `"retoma"`, etc.). `session-handoff` and `prime` in `skill/pt/` are an exact copy of the versions in the [agente-claude-codex](https://github.com/inematds/agente-claude-codex) kit 1.5.2; those in `skill/en/` are the faithful translation.
 
 When editing a skill, keep both versions in sync.

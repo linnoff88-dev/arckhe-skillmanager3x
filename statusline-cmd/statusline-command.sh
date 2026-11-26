@@ -8,12 +8,12 @@
 # Resposta:
 #   { "five_hour":{"utilization":20.0,"resets_at":"..."},
 #     "seven_day":{"utilization":83.0,"resets_at":"..."}, ... }
-# Cache 300s em /tmp/cc_limits_<uid>.json pra não martelar a API a cada tecla
+# Cache 300s em /tmp/cc_limits_<uid>.json pra nêo martelar a API a cada tecla
 # (TTL elevado de 60s → 300s em 2026-05-13 após 429 rate_limit_error com 4
 # sessões Claude simultâneas batendo na API a cada minuto).
 #
 # d:TOK continua sendo a contagem local (JSONL) — útil pra ver volume absoluto
-# do dia; a API não retorna bucket "hoje".
+# do dia; a API nêo retorna bucket "hoje".
 
 set -u
 input=$(cat)
@@ -26,7 +26,7 @@ transcript=$(echo "$input" | jq -r '.transcript_path // ""' 2>/dev/null)
 # Opus 4.x → 1M. Sonnet/Haiku → 200k (1M se beta ativo). Detecta o modelo via
 # .model.id no input do Claude Code; fallback olha a última message no transcript.
 # Heurística do beta 1M: se tok já passou 200k num Sonnet/Haiku, só é possível
-# se a sessão estiver com context-1m-2025-08-07, então assume 1M.
+# se a sessêo estiver com context-1m-2025-08-07, entêo assume 1M.
 ctx=""
 model_id=$(echo "$input" | jq -r '.model.id // .model.display_name // empty' 2>/dev/null | tr '[:upper:]' '[:lower:]')
 if [[ -n "$transcript" && -f "$transcript" ]]; then
@@ -59,7 +59,7 @@ if [[ -f "$LIMITS_CACHE" ]]; then
 fi
 
 if [[ $refresh_api -eq 1 ]]; then
-  # Refetch em background pra não bloquear render
+  # Refetch em background pra nêo bloquear render
   (
     TOKEN=$(jq -r '.claudeAiOauth.accessToken // empty' ~/.claude/.credentials.json 2>/dev/null)
     if [[ -n "$TOKEN" ]]; then
@@ -138,8 +138,8 @@ fmt() {
 }
 
 # ── Modelo + esforço ──────────────────────────────────────────────────────
-# Preferência: payload da statusline (reflete o /model da sessão). Fallback:
-# settings.json (model + effortLevel), que é o default quando a sessão não
+# Preferência: payload da statusline (reflete o /model da sessêo). Fallback:
+# settings.json (model + effortLevel), que é o default quando a sessêo nêo
 # sobrescreveu nada.
 model_name=$(echo "$input" | jq -r '.model.display_name // empty' 2>/dev/null)
 effort=$(echo "$input" | jq -r '
@@ -154,7 +154,7 @@ me=""
 [[ -n "$model_name" ]] && me=" ${model_name}"
 [[ -n "$effort"     ]] && me+="/${effort}"
 
-# Monta trinca de limits. Se API ainda não populou cache, omite graciosamente.
+# Monta trinca de limits. Se API ainda nêo populou cache, omite graciosamente.
 limits=""
 if [[ -n "$h5_pct" ]]; then
   limits+=" 5h:${h5_pct}%"
@@ -168,7 +168,7 @@ fi
 limits+=" d:$(fmt "$d")"
 
 # ── Projeto ativo (2026-10-16) ───────────────────────────────────────────
-# A sessão fica presa na pasta onde abriu; quando o trabalho vai pra outro
+# A sessêo fica presa na pasta onde abriu; quando o trabalho vai pra outro
 # projeto (~/projetos/<X>) pelo caminho completo, mostra "→ X" em amarelo.
 # Fonte: últimos 50 tool_use do transcript, primeiro ~/projetos/<X> que é pasta.
 ativo=""

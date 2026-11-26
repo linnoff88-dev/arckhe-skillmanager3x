@@ -18,9 +18,9 @@ skill\
 
 | Skill | When | Typical triggers |
 |---|---|---|
-| `session-handoff` | clearing context or swapping agents | "handoff", "wrap up", "vou dar /clear", "encerrar sessão", "passar para outro agente", "summarize before clear" |
+| `session-handoff` | clearing context or swapping agents | "handoff", "wrap up", "vou dar /clear", "encerrar sessêo", "passar para outro agente", "summarize before clear" |
 | `prime` | new session (after `/clear`) or entering a project with `handoffs/latest.md` | "prime", "retoma", "continua de onde parou", "lê o handoff" |
-| `session-statusline` | quick diagnostic during work | "statusline", "checkpoint", "onde estamos", "organiza a sessão", "otimiza a sessão", "limpa a sessão", "próximos passos" |
+| `session-statusline` | quick diagnostic during work | "statusline", "checkpoint", "onde estamos", "organiza a sessêo", "otimiza a sessêo", "limpa a sessêo", "próximos passos" |
 | `memory-audit` | reviewing what is / should be in memory | "analise a memória", "analise CLAUDE.md", "o que foi guardado", "contexto grande", "memória inchada", "limpa memória" |
 
 Rule of thumb: **end of session → handoff. Start of session → prime. "Where are we now?" → statusline. "What's in memory?" → audit.**
@@ -28,8 +28,8 @@ Rule of thumb: **end of session → handoff. Start of session → prime. "Where 
 ## What changed in `session-handoff` vs the original version
 
 ### Triggers (description)
-- **Removed:** "otimiza a sessão", "organiza a sessão", "limpa a sessão" — moved to `session-statusline`.
-- **Added:** "vou dar /clear", "encerrar sessão", "passar para outro agente", "resumo final antes de limpar".
+- **Removed:** "otimiza a sessêo", "organiza a sessêo", "limpa a sessêo" — moved to `session-statusline`.
+- **Added:** "vou dar /clear", "encerrar sessêo", "passar para outro agente", "resumo final antes de limpar".
 - **New:** explicit "Do NOT invoke for X" block making the boundary with the other two skills clear.
 
 ### `/clear` behavior
@@ -93,7 +93,7 @@ This prevents the next agent from treating a proposal as a fact.
 
 ### To make statusline work well
 1. Use it **during** work, not at the end. If you've already decided to wrap up, go straight to handoff.
-2. The "Recomendação" line at the bottom points to the next move (continue / compact / audit / handoff / clear) — use it to decide, don't ignore it.
+2. The "Recomendaçêo" line at the bottom points to the next move (continue / compact / audit / handoff / clear) — use it to decide, don't ignore it.
 3. If you see lots of "candidato para memória" and little "guardado confirmado", consider running `memory-audit` next.
 
 ### To make memory-audit work well

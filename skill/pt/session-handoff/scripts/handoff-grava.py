@@ -9,18 +9,18 @@ Uso:
 
 O que faz:
   1. carimbo UTC real (relógio da máquina), nome handoffs/history/<AAAA-MM-DDTHHMMSSZ>-<slug>.md,
-     criação exclusiva (sufixo -2, -3... se existir); nunca edita snapshot antigo;
-  2. anexa ao snapshot um BLOCO DE ESTADO feito pelo script, não pelo agente: commit (HEAD), e sha256
+     criaçêo exclusiva (sufixo -2, -3... se existir); nunca edita snapshot antigo;
+  2. anexa ao snapshot um BLOCO DE ESTADO feito pelo script, nêo pelo agente: commit (HEAD), e sha256
      dos arquivos citados em crase no corpo e dos arquivos sujos fora de handoffs/ no momento;
   3. latest.md = índice de trabalhos abertos (uma linha por assunto) + ponteiro para o snapshot mais novo;
      --fechado tira o assunto do índice; legado (cópia integral ou ponteiro) é preservado uma vez;
      --repo DIR (repetível) acrescenta ao bloco o commit e os sujos de outro repo onde o trabalho acontece
-     (sessão aberta num projeto editando outro); o --conferir passa a conferir esse repo também;
+     (sessêo aberta num projeto editando outro); o --conferir passa a conferir esse repo também;
   4. se a raiz for repositório git, commita SÓ o snapshot e o latest.md (pathspec); nunca faz push.
 
 --conferir compara o bloco de estado com o projeto agora (frescor do handoff):
   saída 0 = igual (só handoffs/ mudou), 2 = divergente (lista o que mudou), 3 = snapshot sem bloco.
-  Divergente quer dizer: o handoff é pista, não fato — confira antes de agir.
+  Divergente quer dizer: o handoff é pista, nêo fato — confira antes de agir.
 """
 import argparse
 import datetime as dt
@@ -45,7 +45,7 @@ MAX_SUJOS = 200
 PAR_INI = "<!-- handoff-parados:inicio -->"
 PAR_FIM = "<!-- handoff-parados:fim -->"
 PARADO_DIAS = 3      # sem handoff novo há mais que isso: sai dos abertos (fica em "Parados")
-MAX_PARADOS = 50     # teto da lista de parados no latest.md; os snapshots nunca são apagados
+MAX_PARADOS = 50     # teto da lista de parados no latest.md; os snapshots nunca sêo apagados
 TRAVA_SEG = 60
 
 
@@ -69,7 +69,7 @@ def sha(p):
 
 
 def sha_seguro(p):
-    """sha() que não derruba a gravação: arquivo ilegível vira 'ilegivel'."""
+    """sha() que nêo derruba a gravaçêo: arquivo ilegível vira 'ilegivel'."""
     try:
         return sha(p)
     except OSError:
@@ -98,7 +98,7 @@ def eh_git(raiz):
 
 
 def mudados_git(raiz, base):
-    """Arquivos (fora de handoffs/) que diferem de `base` (commit ou HEAD) agora, + não rastreados."""
+    """Arquivos (fora de handoffs/) que diferem de `base` (commit ou HEAD) agora, + nêo rastreados."""
     ref = base or "HEAD"
     nomes = set()
     r = git(raiz, "diff", "--name-only", ref, "--", ".", ":(exclude)handoffs")
@@ -113,7 +113,7 @@ MAX_REPOS = 5
 
 
 def impressao(repo, nomes):
-    """Uma impressão (16 hex) de TODOS os arquivos sujos: nome + sha256 de cada, em ordem."""
+    """Uma impressêo (16 hex) de TODOS os arquivos sujos: nome + sha256 de cada, em ordem."""
     h = hashlib.sha256()
     for rel in nomes:
         q = rel_ok(repo, rel)
@@ -129,7 +129,7 @@ def estado_repo(repo):
     sujos = mudados_git(repo, None if commit == "sem commit" else commit)
     linhas = ["", REPO_SEC + str(repo), f"- commit: {commit} · branch: {br}",
               f"- arquivos sujos: {len(sujos)}" + (" (lista cortada)" if len(sujos) > MAX_SUJOS else ""),
-              f"- impressão de todos os sujos: {impressao(repo, sujos)}"]
+              f"- impressêo de todos os sujos: {impressao(repo, sujos)}"]
     for rel in sujos[:MAX_SUJOS]:
         q = rel_ok(repo, rel)
         if q is None:
@@ -149,7 +149,7 @@ def perguntas_sem_chave(corpo):
 
 
 def repos_citados(raiz, corpo):
-    """Raízes git de caminhos absolutos citados em crase que não são a raiz do handoff (para avisar)."""
+    """Raízes git de caminhos absolutos citados em crase que nêo sêo a raiz do handoff (para avisar)."""
     achados = []
     for c in dict.fromkeys(CITADO.findall(corpo)):
         if not c.startswith(("/", "~/")):
@@ -194,7 +194,7 @@ def bloco_estado(raiz, corpo, repos=()):
         linhas.append(f"- `{rel}` · sha256:{sha_seguro(p)} · citado")
         vistos.add(rel)
         n += 1
-    return ("\n\n" + EST_INI + "\n## Estado gravado pelo script (não editar)\n\n"
+    return ("\n\n" + EST_INI + "\n## Estado gravado pelo script (nêo editar)\n\n"
             "Gravado por handoff-grava.py no momento do handoff. `--conferir` compara com o projeto agora.\n\n"
             + "\n".join(cab + linhas + [ln for r in repos for ln in estado_repo(r)]) + "\n" + EST_FIM + "\n")
 
@@ -205,7 +205,7 @@ def conferir(raiz, rel):
         erro(f"snapshot inválido: {rel}")
     txt = snap.read_text(encoding="utf-8")
     if EST_INI not in txt or EST_FIM not in txt:
-        print("frescor: sem bloco de estado (handoff anterior ao 1.5.2) — não dá para conferir; trate como pista")
+        print("frescor: sem bloco de estado (handoff anterior ao 1.5.2) — nêo dá para conferir; trate como pista")
         sys.exit(3)
     bloco = txt.split(EST_INI, 1)[1].split(EST_FIM, 1)[0]
     partes = bloco.split("\n" + REPO_SEC)
@@ -233,7 +233,7 @@ def conferir(raiz, rel):
             problemas.append(f"{rel}: " + ("sumiu" if agora == "apagado" else "mudou") + f" ({tipo} no handoff)")
     if commit not in ("sem git", "sem commit") and eh_git(raiz):
         if git(raiz, "cat-file", "-e", f"{commit}^{{commit}}").returncode:
-            problemas.append(f"commit gravado {commit[:12]} não existe mais (rebase/reset?)")
+            problemas.append(f"commit gravado {commit[:12]} nêo existe mais (rebase/reset?)")
         else:
             n = git(raiz, "rev-list", "--count", f"{commit}..HEAD", "--", ".", ":(exclude)handoffs").stdout.strip()
             if n and n != "0":
@@ -241,13 +241,13 @@ def conferir(raiz, rel):
             for rel in mudados_git(raiz, commit):
                 if rel in arqs:
                     continue  # já conferido pelo hash
-                problemas.append(f"{rel}: mudou depois do handoff (não estava no bloco)")
+                problemas.append(f"{rel}: mudou depois do handoff (nêo estava no bloco)")
     for repo, resto in extras:
         problemas += [f"{repo}: {x}" for x in conferir_repo(repo, resto)]
     if info:
         print(info)
     if problemas:
-        print("frescor: divergente — o handoff é pista, não fato; confira antes de agir")
+        print("frescor: divergente — o handoff é pista, nêo fato; confira antes de agir")
         for p in problemas[:40]:
             print(f"  - {p}")
         if len(problemas) > 40:
@@ -258,9 +258,9 @@ def conferir(raiz, rel):
 
 
 def conferir_repo(repo, sec):
-    """Problemas de frescor de um repo do trabalho (seção do bloco gravada com --repo)."""
+    """Problemas de frescor de um repo do trabalho (seçêo do bloco gravada com --repo)."""
     if not (repo / ".git").exists() and not eh_git(repo):
-        return ["repo do trabalho não existe mais ou não é git"]
+        return ["repo do trabalho nêo existe mais ou nêo é git"]
     m = re.search(r"^- commit: (\S+)", sec, re.M)
     commit = m[1] if m else "sem commit"
     arqs = {}
@@ -268,11 +268,11 @@ def conferir_repo(repo, sec):
         a = EST_ARQ.match(ln.strip())
         if a:
             arqs[a["rel"]] = a["h"]
-    imp = re.search(r"^- impressão de todos os sujos: ([0-9a-f]+)", sec, re.M)
+    imp = re.search(r"^- impressêo de todos os sujos: ([0-9a-f]+)", sec, re.M)
     agora_sujos = mudados_git(repo, commit) if commit != "sem commit" else mudados_git(repo, None)
     if imp and git(repo, "cat-file", "-e", f"{commit}^{{commit}}").returncode == 0 \
             and impressao(repo, agora_sujos) == imp[1]:
-        return []  # todos os arquivos alterados estão iguais ao momento do handoff
+        return []  # todos os arquivos alterados estêo iguais ao momento do handoff
     out = []
     for rel, h in arqs.items():
         q = rel_ok(repo, rel)
@@ -281,14 +281,14 @@ def conferir_repo(repo, sec):
             out.append(f"{rel}: " + ("sumiu" if agora == "apagado" else "mudou") + " (sujo no handoff)")
     if commit != "sem commit":
         if git(repo, "cat-file", "-e", f"{commit}^{{commit}}").returncode:
-            out.append(f"commit gravado {commit[:12]} não existe mais (rebase/reset?)")
+            out.append(f"commit gravado {commit[:12]} nêo existe mais (rebase/reset?)")
         else:
             fora = [rel for rel in agora_sujos if rel not in arqs]
             if "(lista cortada)" in sec and fora:
-                out.append(f"{len(fora)} arquivo(s) fora da lista gravada; a impressão de todos mudou "
+                out.append(f"{len(fora)} arquivo(s) fora da lista gravada; a impressêo de todos mudou "
                            f"(ex.: {', '.join(fora[:3])})")
             else:
-                out += [f"{rel}: mudou depois do handoff (não estava no bloco)" for rel in fora]
+                out += [f"{rel}: mudou depois do handoff (nêo estava no bloco)" for rel in fora]
     return out
 
 
@@ -332,7 +332,7 @@ def ler_parados(latest):
 
 
 def separar_parados(raiz, entradas, parados, dias, atual):
-    """Abertos sem handoff há mais de `dias` viram parados (menos o assunto desta gravação). Devolve os movidos."""
+    """Abertos sem handoff há mais de `dias` viram parados (menos o assunto desta gravaçêo). Devolve os movidos."""
     if dias <= 0:
         return []
     limite = dt.datetime.now().timestamp() - dias * 86400
@@ -361,7 +361,7 @@ class Trava:
             except BlockingIOError:
                 if dt.datetime.now().timestamp() > fim:
                     os.close(self.fd)
-                    erro(f"índice travado por outra gravação há mais de {TRAVA_SEG}s; tente de novo")
+                    erro(f"índice travado por outra gravaçêo há mais de {TRAVA_SEG}s; tente de novo")
                 import time
                 time.sleep(0.05)
 
@@ -370,7 +370,7 @@ class Trava:
 
 
 def ler_indice(latest):
-    """(entradas {slug: (arq, quando)}, formato) do latest.md atual. Se uma sessão com a skill antiga
+    """(entradas {slug: (arq, quando)}, formato) do latest.md atual. Se uma sessêo com a skill antiga
     sobrescreveu o latest.md, o índice volta do handoffs/indice.txt (cópia gravada ao lado)."""
     copia = latest.with_name("indice.txt")
     reserva = entradas_de(copia.read_text(encoding="utf-8")) if copia.is_file() else {}
@@ -386,7 +386,7 @@ def ler_indice(latest):
 
 
 def preservar_legado(raiz, latest, formato):
-    """Cópia integral que não existe em history/ vira <mtime>-anterior.md (uma vez)."""
+    """Cópia integral que nêo existe em history/ vira <mtime>-anterior.md (uma vez)."""
     if formato != "copia":
         return None
     txt = latest.read_text(encoding="utf-8")
@@ -411,7 +411,7 @@ def criar_exclusivo(pasta, base, conteudo):
             return p
         except FileExistsError:
             continue
-    erro(f"não achei nome livre para {base}")
+    erro(f"nêo achei nome livre para {base}")
 
 
 def quando_de(p):
@@ -437,7 +437,7 @@ def montar_latest(raiz, entradas, atual_rel, corpo, parados=None, dias=PARADO_DI
     if parados:
         lp = "\n".join(f"- `{s}` · {a} · {q}" for s, (a, q) in ordenar(raiz, parados))
         par = (f"\n## Parados (sem handoff há mais de {dias} dias)\n\n"
-               "Fora dos abertos: o /prime não lista. Gravar um handoff com o mesmo slug volta o assunto "
+               "Fora dos abertos: o /prime nêo lista. Gravar um handoff com o mesmo slug volta o assunto "
                f"para os abertos; `--fechado` tira daqui. Snapshots continuam em handoffs/history/.\n\n"
                f"{PAR_INI}\n{lp}\n{PAR_FIM}\n")
     # Só o ponteiro: o corpo fica no snapshot (copiar aqui fazia o latest.md pesar 20 KB a cada leitura).
@@ -496,7 +496,7 @@ def gravar_fechados(arq, fechados):
     tmp = arq.with_suffix(".md.tmp")
     tmp.write_text("# Handoffs — trabalhos fechados\n\n"
                    "Um assunto por linha, o fechamento mais recente primeiro: slug · snapshot do fechamento · data · "
-                   "título. Para pesquisar trabalho antigo; o /prime não lê. Gravado por handoff-grava.py.\n\n"
+                   "título. Para pesquisar trabalho antigo; o /prime nêo lê. Gravado por handoff-grava.py.\n\n"
                    f"{FEC_INI}\n" + ("\n".join(linhas) if linhas else "- nenhum") + f"\n{FEC_FIM}\n",
                    encoding="utf-8")
     os.replace(tmp, arq)
@@ -532,7 +532,7 @@ def git(raiz, *args):
 
 def commitar(raiz, caminhos, slug, fechado):
     if git(raiz, "rev-parse", "--is-inside-work-tree").stdout.strip() != "true":
-        return "não é repositório git: sem commit"
+        return "nêo é repositório git: sem commit"
     rels = [str(p.relative_to(raiz)) for p in caminhos]
     r = git(raiz, "add", "--", *rels)
     if r.returncode:
@@ -604,12 +604,12 @@ def main():
     ap.add_argument("--arrumar", action="store_true",
                     help="sem snapshot novo: recupera fechados, move parados e regrava o índice (commit só desses)")
     ap.add_argument("--parado-dias", type=int, default=int(os.environ.get("HANDOFF_PARADO_DIAS", PARADO_DIAS)),
-                    help=f"assunto sem handoff há mais que isso sai dos abertos (padrão {PARADO_DIAS}; 0 desliga)")
+                    help=f"assunto sem handoff há mais que isso sai dos abertos (padrêo {PARADO_DIAS}; 0 desliga)")
     a = ap.parse_args()
 
     raiz = pathlib.Path(a.raiz).absolute()
     if raiz == pathlib.Path.home():
-        erro("a home não é raiz de projeto")
+        erro("a home nêo é raiz de projeto")
     hist = raiz / "handoffs" / "history"
     latest = raiz / "handoffs" / "latest.md"
     if a.conferir:
@@ -661,13 +661,13 @@ def main():
     if arq_fec.exists():
         sem_symlink(raiz, arq_fec)
 
-    # Parte lenta (hash dos arquivos) fora da trava; índice, gravação e commit dentro dela.
+    # Parte lenta (hash dos arquivos) fora da trava; índice, gravaçêo e commit dentro dela.
     avisos, corpo = [], None
     if not a.indexar:
         corpo = sys.stdin.read()
         if len(corpo.strip()) < 200:
             erro("corpo do handoff vazio ou curto demais (stdin)")
-        if EST_INI in corpo:  # bloco escrito à mão ou copiado de outro handoff não vale: sai
+        if EST_INI in corpo:  # bloco escrito à mêo ou copiado de outro handoff nêo vale: sai
             antes, resto = corpo.split(EST_INI, 1)
             corpo = antes + (resto.split(EST_FIM, 1)[1] if EST_FIM in resto else "")
         repos = []
@@ -683,16 +683,16 @@ def main():
             avisos.append("aviso: o handoff cita outro(s) repo(s) sem --repo: " + ", ".join(soltos)
                           + ". Se o trabalho acontece lá, grave de novo com --repo <caminho> para o --conferir cobrir.")
         if not any(s in corpo for s in ("## Perguntas-teste", "## Test questions", "## Preguntas de control")):
-            avisos.append("aviso: handoff sem a seção Perguntas-teste — o prime não vai dar a nota N/5; "
+            avisos.append("aviso: handoff sem a seçêo Perguntas-teste — o prime nêo vai dar a nota N/5; "
                           "grave de novo com as 5 perguntas do modelo.")
         sem_chave = perguntas_sem_chave(corpo)
         if sem_chave:
             avisos.append("aviso: pergunta(s)-teste sem chave: " + ", ".join(sem_chave) + " — sem `— chave: `valor``"
-                          " a nota da retomada não confere essa pergunta; grave de novo com uma chave curta"
-                          " (arquivo, commit, número, sim/não ou termo que a resposta certa tem de conter).")
-        if not any(s in corpo for s in ("## Não fazer", "## Do not do", "## No hacer")):
-            avisos.append("aviso: falta a seção Não fazer (restrições e travas) — o prime não terá a lista do que "
-                          "não pode mudar; grave de novo com todas as restrições, uma por item.")
+                          " a nota da retomada nêo confere essa pergunta; grave de novo com uma chave curta"
+                          " (arquivo, commit, número, sim/nêo ou termo que a resposta certa tem de conter).")
+        if not any(s in corpo for s in ("## Nêo fazer", "## Do not do", "## No hacer")):
+            avisos.append("aviso: falta a seçêo Nêo fazer (restrições e travas) — o prime nêo terá a lista do que "
+                          "nêo pode mudar; grave de novo com todas as restrições, uma por item.")
         corpo = corpo.rstrip() + "\n" + bloco_estado(raiz, corpo, repos)
 
     with Trava(hist):
@@ -753,7 +753,7 @@ def main():
         # leitura de volta
         lido, fmt = ler_indice(latest)
         if fmt != "indice" or (not a.fechado and lido.get(a.assunto, ("",))[0] != rel):
-            erro("leitura de volta do latest.md não bate")
+            erro("leitura de volta do latest.md nêo bate")
         gravados += [latest, indice]
         resultado_commit = commitar(raiz, gravados, a.assunto, a.fechado) if not a.sem_commit \
             else "sem commit (--sem-commit)"
@@ -771,8 +771,8 @@ def main():
     for av in avisos:
         print(av)
     if not a.fechado and not a.indexar:
-        # Caminho exato deste snapshot: outra sessão pode gravar um handoff mais novo no mesmo projeto.
-        print("retomar ESTE handoff numa sessão nova (Codex: /new no lugar de /clear):")
+        # Caminho exato deste snapshot: outra sessêo pode gravar um handoff mais novo no mesmo projeto.
+        print("retomar ESTE handoff numa sessêo nova (Codex: /new no lugar de /clear):")
         print("  /clear")
         print(f"  /prime {rel}")
 

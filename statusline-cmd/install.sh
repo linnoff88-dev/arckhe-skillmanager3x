@@ -55,4 +55,4 @@ echo "Prévia:"
 echo '{"cwd":"'"$PWD"'","effort":{"level":"low"},"model":{"display_name":"Opus 5"}}' | bash "$DEST"
 echo
 echo
-echo "Pronto. Aparece no próximo render do Claude Code (ou reinicie a sessão)."
+echo "Pronto. Aparece no próximo render do Claude Code (ou reinicie a sessêo)."

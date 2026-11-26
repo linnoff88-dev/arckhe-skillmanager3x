@@ -47,7 +47,7 @@ Separate clearly:
 - Memória implícita da conversa: <what the assistant can currently infer>
 - Candidatos para memória durável: <facts/preferences/decisions to retain>
 - Memória curta recomendada: <state useful only for next steps>
-- Remover/não guardar: <noise, outdated details, redundant items>
+- Remover/nêo guardar: <noise, outdated details, redundant items>
 
 ## CLAUDE.md
 - Tamanho percebido: <small | medium | large | unknown>
@@ -61,7 +61,7 @@ Separate clearly:
 1. Manter: <items>
 2. Comprimir: <items>
 3. Remover/adiar: <items>
-4. Próxima revisão: <when to audit again — e.g., "after next major task" or "weekly">
+4. Próxima revisêo: <when to audit again — e.g., "after next major task" or "weekly">
 ```
 
 ## Rules

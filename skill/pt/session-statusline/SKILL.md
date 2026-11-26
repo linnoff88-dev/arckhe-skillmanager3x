@@ -1,6 +1,6 @@
 ---
 name: session-statusline
-description: Use during active work for a quick operational checkpoint. Triggers include "statusline", "checkpoint", "onde estamos", "resume contexto", "organiza a sessão", "otimiza a sessão", "limpa a sessão", "próximos passos", "como está a sessão". Produces a compact snapshot of current focus, what was saved, recent decisions, next actions, and context health. Not for end-of-session — use session-handoff for that.
+description: Use during active work for a quick operational checkpoint. Triggers include "statusline", "checkpoint", "onde estamos", "resume contexto", "organiza a sessêo", "otimiza a sessêo", "limpa a sessêo", "próximos passos", "como está a sessêo". Produces a compact snapshot of current focus, what was saved, recent decisions, next actions, and context health. Not for end-of-session — use session-handoff for that.
 ---
 
 # Session Statusline
@@ -11,7 +11,7 @@ This is a **diagnostic snapshot**, not an end-of-session artifact. Use `session-
 
 ## When to invoke
 
-User says any of: "statusline", "checkpoint", "onde estamos", "resume contexto", "organiza a sessão", "otimiza a sessão", "limpa a sessão", "próximos passos", "como está a sessão".
+User says any of: "statusline", "checkpoint", "onde estamos", "resume contexto", "organiza a sessêo", "otimiza a sessêo", "limpa a sessêo", "próximos passos", "como está a sessêo".
 
 Do NOT invoke for explicit end-of-session signals ("vou dar /clear", "handoff", "wrap up") — those go to `session-handoff`. Do NOT invoke for "analise CLAUDE.md" / "memória inchada" — those go to `memory-audit`.
 
@@ -22,7 +22,7 @@ Do NOT invoke for explicit end-of-session signals ("vou dar /clear", "handoff", 
 - Distinguish:
   - **Guardado confirmado** — the assistant actually wrote to memory or files this session.
   - **Candidatos para memória** — durable facts/decisions worth saving but not yet saved.
-  - **Não guardar** — temporary details, noise.
+  - **Nêo guardar** — temporary details, noise.
 - Prefer terse, concrete output over narrative.
 - If you cannot confirm something was saved (e.g., memory writes), say "candidate" — do not claim it as saved.
 
@@ -39,7 +39,7 @@ Do NOT invoke for explicit end-of-session signals ("vou dar /clear", "handoff", 
 ## O que ficou guardado na memória
 - Guardado confirmado: <items actually written this session, or "none">
 - Candidatos para memória: <durable facts/decisions/preferences worth saving>
-- Não guardar: <temporary details/noise>
+- Nêo guardar: <temporary details/noise>
 
 ## Histórico curto
 - Feito agora: <1-3 bullets>
@@ -51,8 +51,8 @@ Do NOT invoke for explicit end-of-session signals ("vou dar /clear", "handoff", 
 2. <optional next action>
 3. <optional next action>
 
-## Recomendação
-<continuar | compactar | auditar memória | fazer handoff | limpar sessão>
+## Recomendaçêo
+<continuar | compactar | auditar memória | fazer handoff | limpar sessêo>
 ```
 
 ## Rules
