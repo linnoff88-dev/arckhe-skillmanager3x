@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>skillmanager3x — skills para mantener tu sesión de Claude Code bajo control</title>
 <meta name="description" content="Biblioteca de skills de gestión de sesión para Claude Code: session-handoff (guarda en archivo), prime, session-statusline y memory-audit. Cambia de sesión con handoff → /clear → /prime sin perder el hilo.">
-<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/skillmanager3x/guia/">
-<link rel="alternate" hreflang="en" href="https://inematds.github.io/skillmanager3x/guia/en/">
-<link rel="alternate" hreflang="es" href="https://inematds.github.io/skillmanager3x/guia/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://linnoff88-dev.github.io/arckhe-/guia/">
+<link rel="alternate" hreflang="en" href="https://linnoff88-dev.github.io/arckhe-/guia/en/">
+<link rel="alternate" hreflang="es" href="https://linnoff88-dev.github.io/arckhe-/guia/es/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -39,8 +39,8 @@
   nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
   nav .brand .emoji{font-size:1.25rem}
   nav .sep{color:var(--mut);opacity:.45}
-  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
-  nav .inema:hover{filter:brightness(1.15)}
+  nav .ARCKHÉ{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .ARCKHÉ:hover{filter:brightness(1.15)}
   nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
   nav .pro:hover{filter:brightness(1.15)}
   nav .clubpro{display:inline-flex;align-items:center;gap:6px}
@@ -109,9 +109,9 @@
   <a class="brand" href="#top"><span class="emoji">🧠</span> skillmanager3x</a>
   <span class="sep">|</span>
   <span class="clubpro">
-    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <a class="ARCKHÉ" href="https://ARCKHÉ AI" target="_blank" rel="noopener">ARCKHÉ AI</a>
     <span class="sep">-</span>
-    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+    <a class="pro" href="https://ARCKHÉ.pro" target="_blank" rel="noopener">PRO</a>
   </span>
   <div class="links">
     <a class="sec" href="#oque">Qué es</a>
@@ -124,7 +124,7 @@
     <a class="sec" href="#roadmap">Roadmap</a>
     <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
     <button class="tgl" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
-    <a class="btn" href="https://github.com/inematds/skillmanager3x" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="https://github.com/linnoff88-dev/skillmanager3x" target="_blank" rel="noopener">GitHub</a>
   </div>
 </div></nav>
 
@@ -138,7 +138,7 @@
       <div class="cta">
         <a class="btn" href="#guia">Empezar la guía</a>
         <a class="btn ghost" href="#troca">handoff → /clear → /prime</a>
-        <a class="btn ghost" href="https://github.com/inematds/skillmanager3x" target="_blank" rel="noopener">Ver en GitHub</a>
+        <a class="btn ghost" href="https://github.com/linnoff88-dev/skillmanager3x" target="_blank" rel="noopener">Ver en GitHub</a>
       </div>
     </div>
     <figure><img src="../assets/banner-es.jpg" alt="skillmanager3x — skills de sesión: handoff que guarda, /clear y /prime"></figure>
@@ -200,7 +200,7 @@
   <div class="card" style="margin-top:18px;border-color:var(--amb)"><h3>⚠️ Existen dos session-handoff: revisa cuál tienes</h3>
     <div class="grid g2" style="margin-top:10px">
       <div><p><b>Versión antigua (solo chat)</b>, la que este repositorio traía hasta oct/2026 y que circula en otros kits: muestra el resumen en la conversación y no guarda nada. Al dar <code>/clear</code>, el resumen se va junto, a menos que lo copies a mano, y <code>/prime</code> no encuentra qué leer.</p></div>
-      <div><p><b>Versión actual (guarda en archivo)</b>, la que está ahora en <code>skill/pt</code> y <code>skill/en</code>, igual a la del kit <a href="https://github.com/inematds/agente-claude-codex" target="_blank" rel="noopener">agente-claude-codex</a> 1.5.2: muestra en el chat <b>y</b> guarda en <code>handoffs/</code> mediante el script <code>handoff-grava.py</code>, con <code>latest.md</code> como índice de los trabajos abiertos (el mismo formato que lee el hook de Ejecución Larga); crea la carpeta si el proyecto solo tiene <code>CLAUDE.md</code>.</p></div>
+      <div><p><b>Versión actual (guarda en archivo)</b>, la que está ahora en <code>skill/pt</code> y <code>skill/en</code>, igual a la del kit <a href="https://github.com/linnoff88-dev/agente-claude-codex" target="_blank" rel="noopener">agente-claude-codex</a> 1.5.2: muestra en el chat <b>y</b> guarda en <code>handoffs/</code> mediante el script <code>handoff-grava.py</code>, con <code>latest.md</code> como índice de los trabajos abiertos (el mismo formato que lee el hook de Ejecución Larga); crea la carpeta si el proyecto solo tiene <code>CLAUDE.md</code>.</p></div>
     </div>
     <pre><span class="c"># 0 = versión solo chat; 1 o más = guarda en handoffs/</span>
 <span class="k">grep</span> -c <span class="s">"handoffs/history"</span> ~/.claude/skills/session-handoff/SKILL.md
@@ -208,8 +208,8 @@
 <span class="c"># cambiar por la versión que guarda (e instalar el par prime)</span>
 <span class="k">cp</span> -r skill/pt/session-handoff skill/pt/prime ~/.claude/skills/</pre>
   </div>
-  <div class="card" style="margin-top:18px;border-color:var(--amb)"><h3>⏳ Para trabajo de horas: Ejecución Larga</h3><p>Este ciclo es la base del proyecto <a href="https://inematds.github.io/execucao-longa/guia/es/#troca" target="_blank" rel="noopener">Ejecución Larga</a>, el método para agentes que trabajan horas o días (<code>/goal</code>, archivos de estado, límites y criterio de listo). Allí está el hook que mide el contexto y guarda el handoff solo en <b>~70%</b> y <b>~85%</b> y justo después de una compactación, mientras el caché aún está caliente; tú solo das <code>/clear</code> y <code>/prime</code>. También están la investigación detrás de las franjas de contexto y el <code>recall</code> para buscar en todo lo que ya se ha dicho.</p>
-    <div class="cta" style="margin-top:12px"><a class="btn" href="https://inematds.github.io/execucao-longa/guia/es/" target="_blank" rel="noopener">Abrir la guía Ejecución Larga</a><a class="btn ghost" href="https://github.com/inematds/execucao-longa" target="_blank" rel="noopener">inematds/execucao-longa</a></div></div>
+  <div class="card" style="margin-top:18px;border-color:var(--amb)"><h3>⏳ Para trabajo de horas: Ejecución Larga</h3><p>Este ciclo es la base del proyecto <a href="https://linnoff88-dev.github.io/arckhe-/guia/es/#troca" target="_blank" rel="noopener">Ejecución Larga</a>, el método para agentes que trabajan horas o días (<code>/goal</code>, archivos de estado, límites y criterio de listo). Allí está el hook que mide el contexto y guarda el handoff solo en <b>~70%</b> y <b>~85%</b> y justo después de una compactación, mientras el caché aún está caliente; tú solo das <code>/clear</code> y <code>/prime</code>. También están la investigación detrás de las franjas de contexto y el <code>recall</code> para buscar en todo lo que ya se ha dicho.</p>
+    <div class="cta" style="margin-top:12px"><a class="btn" href="https://linnoff88-dev.github.io/arckhe-/guia/es/" target="_blank" rel="noopener">Abrir la guía Ejecución Larga</a><a class="btn ghost" href="https://github.com/linnoff88-dev/execucao-longa" target="_blank" rel="noopener">linnoff88-dev/execucao-longa</a></div></div>
 </div></section>
 
 <section id="pre"><div class="wrap">
@@ -219,7 +219,7 @@
   <div class="grid g3">
     <div class="card"><h3>Claude Code</h3><p>El CLI de Anthropic, con soporte de skills (la carpeta <code>skills/</code> se recorre al iniciar).</p><pre><span class="c"># verificar que está instalado</span>
 <span class="k">claude</span> --version</pre></div>
-    <div class="card"><h3>El repositorio</h3><p>Clónalo (o descárgalo) — las skills son solo archivos de texto.</p><pre><span class="k">git</span> clone <span class="s">https://github.com/inematds/skillmanager3x</span>
+    <div class="card"><h3>El repositorio</h3><p>Clónalo (o descárgalo) — las skills son solo archivos de texto.</p><pre><span class="k">git</span> clone <span class="s">https://github.com/linnoff88-dev/skillmanager3x</span>
 <span class="k">cd</span> skillmanager3x</pre></div>
     <div class="card"><h3>Una carpeta de skills</h3><p>Global (todas las sesiones) o por proyecto. Créala si no existe.</p><pre><span class="c"># global</span>
 <span class="k">mkdir</span> -p ~/.claude/skills</pre></div>
@@ -234,7 +234,7 @@
   <div class="step"><div class="b">1</div><div>
     <h3>Clona el repositorio</h3>
     <p>Las skills viven en <code>skill/pt/</code> y <code>skill/en/</code> — misma estructura en los dos idiomas.</p>
-<pre><span class="k">git</span> clone <span class="s">https://github.com/inematds/skillmanager3x</span>
+<pre><span class="k">git</span> clone <span class="s">https://github.com/linnoff88-dev/skillmanager3x</span>
 <span class="k">cd</span> skillmanager3x</pre>
   </div></div>
 
@@ -369,7 +369,7 @@ nei@maquina:~/projetos/wifi <span class="s">Opus 5/low</span> ctx 10% 5h:24%→0
   <div class="step" style="margin-top:34px"><div class="b">1</div><div>
     <h3>Instala con un comando</h3>
     <p>El script copia la statusline a <code>~/.claude/</code> y registra el bloque <code>statusLine</code> en tu <code>settings.json</code> — preservando el resto del archivo, con backup <code>.bak</code>.</p>
-<pre><span class="k">git</span> clone <span class="s">https://github.com/inematds/skillmanager3x</span>
+<pre><span class="k">git</span> clone <span class="s">https://github.com/linnoff88-dev/skillmanager3x</span>
 <span class="k">bash</span> skillmanager3x/statusline-cmd/install.sh</pre>
   </div></div>
 
@@ -386,7 +386,7 @@ nei@maquina:~/projetos/wifi <span class="s">Opus 5/low</span> ctx 10% 5h:24%→0
 <pre><span class="k">bash</span> statusline-cmd/install.sh --uninstall</pre>
   </div></div>
 
-  <p class="sub">Los porcentajes de 5h y semana vienen del endpoint de uso de Anthropic usando <strong>tus propias credenciales</strong> (<code>~/.claude/.credentials.json</code>) — ningún token va en el repositorio. Detalles, campos disponibles y cómo personalizar: <a href="https://github.com/inematds/skillmanager3x/tree/main/statusline-cmd">statusline-cmd/README.md</a> (en portugués).</p>
+  <p class="sub">Los porcentajes de 5h y semana vienen del endpoint de uso de Anthropic usando <strong>tus propias credenciales</strong> (<code>~/.claude/.credentials.json</code>) — ningún token va en el repositorio. Detalles, campos disponibles y cómo personalizar: <a href="https://github.com/linnoff88-dev/skillmanager3x/tree/main/statusline-cmd">statusline-cmd/README.md</a> (en portugués).</p>
   <p class="sub"><strong>Nombres parecidos, cosas distintas:</strong> la skill <code>session-statusline</code> escribe un checkpoint en texto cuando lo pides; la carpeta <code>statusline-cmd</code> instala la barra fija de la terminal.</p>
 </div></section>
 
@@ -398,15 +398,15 @@ nei@maquina:~/projetos/wifi <span class="s">Opus 5/low</span> ctx 10% 5h:24%→0
   <div class="phase"><div class="tag">Hecho</div><div class="d"><strong>Gatillos sin superposición</strong><span>Cada skill tiene un solo trabajo. La statusline termina con una recomendación que apunta a la siguiente — el enrutamiento es explícito, no adivinado.</span></div></div>
   <div class="phase"><div class="tag">Convención</div><div class="d"><strong>Sincronizar en/pt al editar</strong><span>Las dos versiones tienen la misma estructura. Al tocar una skill, actualiza las dos — es la regla de mantenimiento del repo.</span></div></div>
   <div class="phase"><div class="tag">Hecho · oct/2026</div><div class="d"><strong>Handoff que guarda + prime</strong><span><code>session-handoff</code> pasó a guardar en <code>handoffs/history/</code> + <code>handoffs/latest.md</code> (misma versión del kit agente-claude-codex, hoy 1.5.2) y entró <code>prime</code>, que lee ese archivo en la sesión nueva. Ciclo completo: handoff → <code>/clear</code> → <code>/prime</code>.</span></div></div>
-  <div class="phase"><div class="tag">Relacionado</div><div class="d"><strong>Ejecución Larga</strong><span>Hook que guarda el handoff solo por franja de contexto, archivos de estado y <code>/goal</code> para trabajo de horas: <a href="https://inematds.github.io/execucao-longa/guia/es/" target="_blank" rel="noopener">guía Ejecución Larga</a>.</span></div></div>
+  <div class="phase"><div class="tag">Relacionado</div><div class="d"><strong>Ejecución Larga</strong><span>Hook que guarda el handoff solo por franja de contexto, archivos de estado y <code>/goal</code> para trabajo de horas: <a href="https://linnoff88-dev.github.io/arckhe-/guia/es/" target="_blank" rel="noopener">guía Ejecución Larga</a>.</span></div></div>
 </div></section>
 
 <footer>
   <div class="wrap">
     <div class="pill">Claude Code</div><div class="pill">Markdown + YAML frontmatter</div><div class="pill">Cero dependencias</div><div class="pill">PT / EN / ES</div>
     <p style="margin-top:18px">skillmanager3x · skills de gestión de sesión ·
-      <a href="https://github.com/inematds/skillmanager3x">inematds/skillmanager3x</a> ·
-      <a href="https://inema.club">INEMA.CLUB</a></p>
+      <a href="https://github.com/linnoff88-dev/skillmanager3x">linnoff88-dev/skillmanager3x</a> ·
+      <a href="https://ARCKHÉ AI">ARCKHÉ AI</a></p>
   </div>
 </footer>
 

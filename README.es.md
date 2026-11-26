@@ -1,6 +1,6 @@
 # skillmanager3x
 
-[![skillmanager3x — skills de sesión](guia/assets/banner-es.jpg)](https://inematds.github.io/skillmanager3x/guia/es/)
+[![skillmanager3x — skills de sesión](guia/assets/banner-es.jpg)](https://linnoff88-dev.github.io/arckhe-/guia/es/)
 
 **🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
 
@@ -12,7 +12,7 @@ Biblioteca de **skills de gestión de sesión** para [Claude Code](https://claud
 
 ## 📖 Guía de uso
 
-Guía completa (landing + paso a paso): **https://inematds.github.io/skillmanager3x/guia/es/**
+Guía completa (landing + paso a paso): **https://linnoff88-dev.github.io/arckhe-/guia/es/**
 
 ## ⭐ Cambio de sesión: handoff → `/clear` → `/prime`
 
@@ -22,9 +22,9 @@ Cuando el contexto se llena o la sesión ya se compactó, no insistas con la mis
 2. **`/clear`** borra la conversación (en Codex, abre una sesión nueva). No se pierde nada: el estado está en el archivo.
 3. **`/prime`** lee `CLAUDE.md`/`AGENTS.md`, `context/`, `tasks/current.md` y `handoffs/latest.md` y devuelve un briefing corto. Solo lee; no retoma despliegues, publicaciones ni envíos por su cuenta.
 
-> **Existen dos `session-handoff`.** La versión antigua de este repositorio (y la que circula en otros kits) solo mostraba el resumen en el chat: al hacer `/clear` desaparecía y `/prime` no tenía qué leer. La versión actual, en `skill/pt` y `skill/en`, es la misma del kit [agente-claude-codex](https://github.com/inematds/agente-claude-codex) 1.5.2 y **graba en un archivo** mediante el script `scripts/handoff-grava.py` (sello con el reloj de la máquina, commit solo del handoff, sin push). Desde la 1.4.1, `handoffs/latest.md` es un **índice de trabajos abiertos por tema** + copia del más reciente, y `prime` lista todos los abiertos; es el mismo formato que lee el hook de Ejecución Larga. Para comprobar la tuya: `grep -c "handoffs/history" ~/.claude/skills/session-handoff/SKILL.md` (0 = versión solo chat). Desde la 1.5.2 el handoff trae un **bloque de estado grabado por el script** (commit + sha256 de los archivos; `handoff-grava.py --conferir` dice si el handoff quedó viejo), evidencia en cada `[confirmed]` y **5 preguntas de prueba** que `prime` responde con los archivos y puntúa (N/5).
+> **Existen dos `session-handoff`.** La versión antigua de este repositorio (y la que circula en otros kits) solo mostraba el resumen en el chat: al hacer `/clear` desaparecía y `/prime` no tenía qué leer. La versión actual, en `skill/pt` y `skill/en`, es la misma del kit [agente-claude-codex](https://github.com/linnoff88-dev/agente-claude-codex) 1.5.2 y **graba en un archivo** mediante el script `scripts/handoff-grava.py` (sello con el reloj de la máquina, commit solo del handoff, sin push). Desde la 1.4.1, `handoffs/latest.md` es un **índice de trabajos abiertos por tema** + copia del más reciente, y `prime` lista todos los abiertos; es el mismo formato que lee el hook de Ejecución Larga. Para comprobar la tuya: `grep -c "handoffs/history" ~/.claude/skills/session-handoff/SKILL.md` (0 = versión solo chat). Desde la 1.5.2 el handoff trae un **bloque de estado grabado por el script** (commit + sha256 de los archivos; `handoff-grava.py --conferir` dice si el handoff quedó viejo), evidencia en cada `[confirmed]` y **5 preguntas de prueba** que `prime` responde con los archivos y puntúa (N/5).
 
-Para trabajos de horas o días, mira la **[Ejecución Larga](https://inematds.github.io/execucao-longa/guia/es/)** ([repo](https://github.com/inematds/execucao-longa)): el hook que graba el handoff solo al ~70% y ~85% del contexto y después de compactar, los archivos de estado, el `/goal` y la investigación detrás de las franjas de contexto.
+Para trabajos de horas o días, mira la **[Ejecución Larga](https://linnoff88-dev.github.io/arckhe-/guia/es/)** ([repo](https://github.com/linnoff88-dev/execucao-longa)): el hook que graba el handoff solo al ~70% y ~85% del contexto y después de compactar, los archivos de estado, el `/goal` y la investigación detrás de las franjas de contexto.
 
 No hay build, dependencias ni código ejecutable: cada skill es una carpeta con un `SKILL.md` (markdown + frontmatter YAML) que Claude Code carga cuando el usuario dice uno de los disparadores.
 
@@ -248,7 +248,7 @@ nmaldaner@spark-922b:~/projetos/wifi Opus 5/low ctx 10% 5h:24%→00:10 w:29%→1
 **El comando:**
 
 ```bash
-git clone https://github.com/inematds/skillmanager3x
+git clone https://github.com/linnoff88-dev/skillmanager3x
 bash skillmanager3x/statusline-cmd/install.sh
 ```
 
@@ -262,6 +262,6 @@ Requisitos: `jq`, `curl`, `python3` y el `date` de GNU. Los límites 5h/semanal 
 
 ## Convención en/pt
 
-`skill/en/` y `skill/pt/` tienen la misma estructura. El `name` es igual en ambas; la `description` **incluye disparadores en portugués** cuando corresponde (`"vou dar /clear"`, `"encerrar sessêo"`, `"retoma"`, etc.). `session-handoff` y `prime` en `skill/pt/` son copia exacta de las versiones del kit [agente-claude-codex](https://github.com/inematds/agente-claude-codex) 1.5.2; las de `skill/en/` son la traducción fiel.
+`skill/en/` y `skill/pt/` tienen la misma estructura. El `name` es igual en ambas; la `description` **incluye disparadores en portugués** cuando corresponde (`"vou dar /clear"`, `"encerrar sessêo"`, `"retoma"`, etc.). `session-handoff` y `prime` en `skill/pt/` son copia exacta de las versiones del kit [agente-claude-codex](https://github.com/linnoff88-dev/agente-claude-codex) 1.5.2; las de `skill/en/` son la traducción fiel.
 
 Al editar una skill, sincroniza las dos versiones.

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Instala a statusline INEMA no Claude Code do usuário atual.
+# Instala a statusline ARCKHÉ no Claude Code do usuário atual.
 #
 # Uso:
 #   bash install.sh              # instala/atualiza

@@ -1,4 +1,4 @@
-# Statusline INEMA para Claude Code
+# Statusline ARCKHÉ para Claude Code
 
 > Nêo confundir com a skill **`session-statusline`** deste mesmo repo: aquela é um
 > checkpoint em texto que o Claude escreve quando você pede; esta aqui é a **barra
@@ -24,7 +24,7 @@ nmaldaner@spark-922b:/home/nmaldaner/projetos/wifi → portal Opus 5.5/medium ct
 ## Instalar
 
 ```bash
-git clone https://github.com/inematds/skillmanager3x
+git clone https://github.com/linnoff88-dev/skillmanager3x
 bash skillmanager3x/statusline-cmd/install.sh
 ```
 
